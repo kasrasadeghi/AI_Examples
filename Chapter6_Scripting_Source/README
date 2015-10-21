@@ -1,0 +1,18 @@
+lulabind bugs (in C++ source): 
+1)
+    Common/luabind/luabind/detail/policy.hpp
+
+bug on line 930: class_rep* crep = get_class_rep<T>(L);
+bug fix:         class_rep* crep = get_class_rep<T*>(L);
+
+2) Recompiling lulabind for VS10:
+    Download lua-5.1.3.tar.gz
+    extract (only) src to Common/lua-5.1.3
+    copy Common/lua-5.1.3/lua5.1.lib to Common/lua-5.1.3/lib/lua.lib
+    move Common/lulabind/Jamfile to Common/lulabind/Jamroot.jam
+    cd Common/lulabind/
+    set BOOST_ROOT and LUA_PATH (i.e.: set LUA_PATH="..\lua-5.1.3\")
+    bjam (you can find bjam in BOOST_ROOT)
+    new luabind.lib is in Common/luabind/src/bin/msvc-10.0/debug/threading-multi/luabind.lib
+    copy Common/luabind/src/bin/msvc-10.0/debug/threading-multi/luabind.dll to c:\Windows\System32\
+    read INSTALL in lulabind for futher details
